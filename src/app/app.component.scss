@@ -1,0 +1,25 @@
+@font-face {
+  font-family: Roboto;
+}
+body, html{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+main-content{
+  width: 100%;
+  height: 100%;
+}
+::ng-deep * {
+  margin: 0;
+  padding: 0;
+}
+.header{
+  height: 6vh;
+  width: 100%;
+}
+main-content{
+  width: 100%;
+  height: 100%;
+}

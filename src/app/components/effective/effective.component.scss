@@ -1,0 +1,71 @@
+@import '~@angular/material/theming';
+:host {
+  display: flex;
+  align-items: center;
+  background: #1C1F2B;
+  color: white;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.head{
+  background: #272A38;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 20%;
+  svg{
+    padding: 10px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    object-fit: cover;
+  }
+}
+.head-left-content{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+  justify-content: start;
+}
+.head-right-content{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 50%;
+  justify-content: end;
+}
+.title{
+  color: white;
+}
+mat-menu-item{
+  color: black;
+}
+
+.mat-manu{
+  width: 20%;
+  height: 100%;
+  svg{
+    padding: 10px;
+    display: block;
+    width: 44px;
+    height: 54px;
+    object-fit: cover;
+  }
+}
+.mat-menu-button{
+  background: #272A38;
+}
+.demo-chart{
+  margin: auto;
+  width: 250px;
+  height: 250px;
+}
