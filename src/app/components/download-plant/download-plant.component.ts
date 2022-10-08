@@ -5,6 +5,8 @@ import {Component,
   SimpleChanges,
   ViewChild,} from '@angular/core';
 
+import {HttpClient} from "@angular/common/http";
+
 import * as echarts from 'echarts/core';
 @Component({
   selector: 'download-plant',
@@ -14,7 +16,11 @@ import * as echarts from 'echarts/core';
 export class DownloadPlantComponent implements OnInit, OnChanges{
   dataSource: any;
 
-  constructor() {
+  constructor(private http:HttpClient) {
+  }
+
+  getData(url: string){
+    return this.http.get<any>(url)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -55,13 +61,7 @@ export class DownloadPlantComponent implements OnInit, OnChanges{
           labelLine: {
             show: false
           },
-          data: [
-            { value: 1048, name: 'Search Engine' },
-            { value: 735, name: 'Direct' },
-            { value: 580, name: 'Email' },
-            { value: 484, name: 'Union Ads' },
-            { value: 300, name: 'Video Ads' }
-          ]
+          data: dataSource
         }
       ]
     };
@@ -73,8 +73,17 @@ export class DownloadPlantComponent implements OnInit, OnChanges{
   options: any;
 
   ngOnInit() {
-    this.confirmOptionsForEchart([]);
-    this.viewInit();
+    this.getData('assets/ex1.json').subscribe({
+      next:(data) => {
+        let x: any[] = [];
+        for(let i = 0; i < data[1].value.length; i++){
+          x.push({ value: data[1].value[i].v, name: data[1].value[i].d })
+        }
+        this.dataSource = x;
+        this.confirmOptionsForEchart(this.dataSource);
+        this.viewInit();
+      }
+    })
   }
 
   viewInit() {

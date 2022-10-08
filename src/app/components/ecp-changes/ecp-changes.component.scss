@@ -64,3 +64,13 @@ mat-menu-item{
 .mat-menu-button{
   background: #272A38;
 }
+.content{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.demo-chart{
+  width: 100%;
+  height: 12vh;
+}

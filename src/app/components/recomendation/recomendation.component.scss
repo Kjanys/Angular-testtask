@@ -71,3 +71,9 @@ mat-menu-item{
 ::ng-deep .dx-list-item{
   color: white;
 }
+.content{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

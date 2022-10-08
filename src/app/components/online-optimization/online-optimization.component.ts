@@ -1,20 +1,31 @@
-import {Component,
+import {
+  Component,
   ElementRef,
   OnChanges,
   OnInit,
   SimpleChanges,
-  ViewChild,} from '@angular/core';
-
+  ViewChild,
+} from '@angular/core';
 import * as echarts from 'echarts/core';
+
+import {HttpClient} from "@angular/common/http";
+
+const Excel = require('exceljs');
+
 @Component({
   selector: 'online-optimization',
   templateUrl: './online-optimization.component.html',
   styleUrls: ['./online-optimization.component.scss']
 })
-export class OnlineOptimizationComponent implements OnInit, OnChanges{
+
+export class OnlineOptimizationComponent implements OnInit, OnChanges {
   dataSource: any;
 
-  constructor() {
+  constructor(private http: HttpClient) {
+  }
+
+  getData(url: string) {
+    return this.http.get<any>(url)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -24,15 +35,12 @@ export class OnlineOptimizationComponent implements OnInit, OnChanges{
     this.options = {
       title: {
         textStyle: {color: 'white'},
-        text: 'Stacked Line'
+        text: 'Пример графиков'
       },
       tooltip: {
         trigger: 'axis'
       },
-      legend: {
-        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine'],
-        textStyle: {color: 'white'}
-      },
+      legend: {},
       grid: {
         left: '3%',
         right: '4%',
@@ -46,56 +54,51 @@ export class OnlineOptimizationComponent implements OnInit, OnChanges{
       },
       xAxis: {
         type: 'category',
-        boundaryGap: false,
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        data: dataSource[0],
         textStyle: {color: 'white'}
       },
       yAxis: {
         type: 'value'
       },
-      series: [
+      series: [{
+        type: "line",
+        data: dataSource[1]
+      },
         {
-          name: 'Email',
-          type: 'line',
-          stack: 'Total',
-          data: [120, 132, 101, 134, 90, 230, 210]
-        },
-        {
-          name: 'Union Ads',
-          type: 'line',
-          stack: 'Total',
-          data: [220, 182, 191, 234, 290, 330, 310]
-        },
-        {
-          name: 'Video Ads',
-          type: 'line',
-          stack: 'Total',
-          data: [150, 232, 201, 154, 190, 330, 410]
-        },
-        {
-          name: 'Direct',
-          type: 'line',
-          stack: 'Total',
-          data: [320, 332, 301, 334, 390, 330, 320]
-        },
-        {
-          name: 'Search Engine',
-          type: 'line',
-          stack: 'Total',
-          data: [820, 932, 901, 934, 1290, 1330, 1320]
-        }
-      ]
-    };
+          type: "line",
+          data: dataSource[2]
+        }]
+    }
   }
-
   @ViewChild('main')
   chartElement!: ElementRef;
   myChart: any;
   options: any;
 
   ngOnInit() {
-    this.confirmOptionsForEchart([]);
-    this.viewInit();
+    this.getData('assets/ex1.json').subscribe({
+      next: (data) => {
+        let x: string[] = [];
+        let y: number[] = [];
+        let x1: string[] = [];
+        let y1: number[] = [];
+        for (let i = 0; i < data[0].value.length; i++) {
+          x.push(data[0].value[i].d)
+          y.push(data[0].value[i].v)
+        }
+        for (let i = 0; i < data[1].value.length; i++) {
+          x1.push(data[1].value[i].d)
+          y1.push(data[1].value[i].v)
+        }
+        this.dataSource = [x, y, y1];
+        this.confirmOptionsForEchart(this.dataSource);
+        this.viewInit();
+      }
+    })
+  }
+
+  excelExp(): void{
+    excelExport(this.dataSource);
   }
 
   viewInit() {
@@ -104,4 +107,21 @@ export class OnlineOptimizationComponent implements OnInit, OnChanges{
     }
     this.myChart.setOption(this.options);
   }
+}
+
+async function excelExport(dataSource: any) {
+  const workbook = new Excel.Workbook();
+  const worksheet = workbook.addWorksheet("Sheet");
+
+  worksheet.columns = [
+    {header: 'x', key: 'd'},
+    {header: 'y', key: 'v'},
+    {header: 'y1', key: 'v1'}
+  ];
+  for(let i = 0; i < dataSource[2].length; i++){
+    worksheet.addRow(dataSource[0][i], dataSource[1][i], dataSource[2][i]);
+  }
+
+  await workbook.xlsx.writeBuffer('export.xlsx');
+  console.log("Я создаль")
 }

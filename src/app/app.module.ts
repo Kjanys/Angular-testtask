@@ -14,6 +14,7 @@ import {DownloadPlantComponent} from "./components/download-plant/download-plant
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { NgxEchartsModule } from 'ngx-echarts';
 import {EcpChangesComponent} from "./components/ecp-changes/ecp-changes.component";
+import {HttpClientModule} from "@angular/common/http";
 import {OnlineOptimizationComponent} from "./components/online-optimization/online-optimization.component";
 import * as echarts from 'echarts/core';
 
@@ -27,11 +28,13 @@ import {
   ToolboxComponent,
   TooltipComponent,
   GridComponent,
-  DataZoomComponent
+  LegendComponent,
+  DataZoomComponent,
 } from 'echarts/components';
-import { LineChart } from 'echarts/charts';
+import { LineChart, PieChart, GaugeChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
+
 
 
 
@@ -39,9 +42,12 @@ echarts.use([
   TitleComponent,
   ToolboxComponent,
   TooltipComponent,
+  GaugeChart,
   GridComponent,
   DataZoomComponent,
   LineChart,
+  LegendComponent,
+  PieChart,
   CanvasRenderer,
   UniversalTransition
 ]);
@@ -61,6 +67,7 @@ echarts.use([
     BrowserModule,
     DxPieChartModule,
     DxScrollViewModule,
+    HttpClientModule,
     DxListModule,
     BrowserAnimationsModule,
     AppRoutingModule,

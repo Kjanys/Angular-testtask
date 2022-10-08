@@ -22,6 +22,14 @@
       <span class="title">Онлайн оптимизация</span>
     </div>
     <div class="head-right-content">
+      <a class="export-button" (click)="excelExp()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 15C4.15 15 1 11.85 1 8C1 4.15 4.15 1 8 1C11.85 1 15 4.15 15 8C15 11.85 11.85 15 8 15Z" stroke="#D7E2F2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 4.79999V11.2" stroke="#D7E2F2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4.80005 8H11.2" stroke="#D7E2F2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Экспорт в Excel</span>
+      </a>
       <div class="mat-menu">
         <svg width="4" height="14" [matMenuTriggerFor]="menu" viewBox="0 0 4 14" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1.79999 1H2.19999" stroke="#606580" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -29,9 +37,6 @@
           <path d="M1.79999 13H2.19999" stroke="#606580" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <span>Экспортироваать в файл</span>
-          </button>
         </mat-menu>
       </div>
     </div>

@@ -23,10 +23,14 @@
     "devextreme": "22.1.5",
     "devextreme-angular": "22.1.5",
     "echarts": "^5.4.0",
+    "exceljs": "^4.3.0",
+    "excelservice": "^0.0.1",
+    "file-saver": "^2.0.5",
     "moment": "^2.29.4",
     "ngx-echarts": "^14.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

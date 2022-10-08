@@ -29,14 +29,15 @@
           <path d="M1.79999 13H2.19999" stroke="#606580" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <span>Экспортироваать в файл</span>
-          </button>
         </mat-menu>
       </div>
     </div>
   </div>
   <div class="content">
-
+    <dx-scroll-view>
+      <div echarts #main [options]="options" class="demo-chart"></div>
+      <div echarts #main [options]="options" class="demo-chart"></div>
+      <div echarts #main [options]="options" class="demo-chart"></div>
+    </dx-scroll-view>
   </div>
 </div>
